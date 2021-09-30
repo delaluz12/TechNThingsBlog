@@ -1,0 +1,28 @@
+{
+  "name": "technthingsblog",
+  "version": "1.0.0",
+  "description": "CMS-style blog utilizing MVC architectural structure",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delaluz12/TechNThingsBlog.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/delaluz12/TechNThingsBlog/issues"
+  },
+  "homepage": "https://github.com/delaluz12/TechNThingsBlog#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-session-sequelize": "^7.1.2",
+    "dotenv": "^10.0.0",
+    "express-handlebars": "^5.3.4",
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
+  }
+}

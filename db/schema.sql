@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS techNthings;
+CREATE DATABASE techNthings;
