@@ -5,14 +5,26 @@ const exhbs = require('express-handlebars');
 const routes = require('./controller');
 const helpers = require('./util/helpers');
 const sequelize = require('./config/connection');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+// Set up sessions
+const sess = {
+    secret: 'Super secret secret',
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
+};
+app.use(session(sess));
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 
 // create hb engine object that will hold helper fncs
-const hbs = exhbs.create({helpers});
+const hbs = exhbs.create({ helpers });
 
 //communicate to express.js we are using hbs as template engine
 app.engine('handlebars', hbs.engine);
@@ -28,6 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 //sync database
-sequelize.sync({force : false}).then(()=> {
-    app.listen(PORT, ()=> console.log(`Listening on PORT ${PORT}`));
+sequelize.sync({ force: true }).then(() => {
+    app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 });
