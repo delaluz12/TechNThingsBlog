@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 const sequelize = require('../config/connection');
 
 class User extends Model {
-    // checkPassword(loginPw) {
-    //     return bcrypt.compareSync(loginPw, this.password);
-    // }
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+    }
 }
 
 User.init(
@@ -37,17 +37,18 @@ User.init(
                 return newUserData;
             },
             beforeBulkCreate: async (users) => {
+                //loop thru array for users to grab the password
                 for (const user of users) {
                     const {
                         password
                     } = user;
-
+                    //hash password
                     var saltRounds = 10;
                     var salt = bcrypt.genSaltSync(saltRounds);
-                    var hash = bcrypt.hashSync(password, salt);
+                    var hash = await bcrypt.hashSync(password, salt);
                     user.password = hash;
                 }
-
+                //return user with hashed password
                 return User;
 
 
