@@ -2,6 +2,8 @@
 const post = require('express').Router();
 
 const { User, Post, Comment } = require('../../models');
+//import the helper script for authentication
+const withAuth = require('../../util/auth');
 
 // get all posts
 post.get('/', async (req, res) => {
@@ -49,7 +51,7 @@ post.get('/:id', async (req, res) => {
 });
 
 //create new post
-post.post('/', async (req, res) => {
+post.post('/', withAuth,  async (req, res) => {
     try {
         const newPost = await Post.create({
             title: req.body.title,
@@ -66,7 +68,7 @@ post.post('/', async (req, res) => {
 });
 
 //update post by ID --updates title and content
-post.put('/:id', async (req, res)=> {
+post.put('/:id', withAuth, async (req, res)=> {
     try {
         const updatePost = await Post.update( {
             title: req.body.title,
@@ -85,7 +87,7 @@ post.put('/:id', async (req, res)=> {
 });
 
 // delete post by ID 
-post.delete('/:id', async (req, res)=> {
+post.delete('/:id', withAuth, async (req, res)=> {
     try {
         const delPost = await Post.destroy({
             where:{ 

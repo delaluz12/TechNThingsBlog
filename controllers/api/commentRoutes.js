@@ -1,6 +1,8 @@
 //import router
 const comment = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+//import the helper script for authentication
+const withAuth = require('../../util/auth');
 
 //get all comments with their associated posts (with their associated user) and user that owns that comment, date it was created
 comment.get('/', async (req, res) => {
@@ -41,8 +43,8 @@ comment.get('/:id', async (req, res) => {
     }
 });
 
-//post a new comment 
-comment.post('/', async (req, res) => {
+//post a new comment --must be logged in
+comment.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Comment.create({
             comment_text: req.body.comment_text,
@@ -57,7 +59,7 @@ comment.post('/', async (req, res) => {
 });
 
 //update a comment's text by ID
-comment.put('/:id', async (req, res) => {
+comment.put('/:id', withAuth, async (req, res) => {
     try {
         const updateComment = await Comment.update({
             comment_text: req.body.comment_text,
@@ -76,7 +78,7 @@ comment.put('/:id', async (req, res) => {
 
 
 //delete comment by ID
-comment.delete('/:id', async (req, res) => {
+comment.delete('/:id', withAuth, async (req, res) => {
     try {
         const del = await Comment.destroy({
             where: { id: req.params.id },

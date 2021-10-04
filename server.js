@@ -2,7 +2,7 @@
 const path = require('path');
 const express = require('express');
 const exhbs = require('express-handlebars');
-const routes = require('./controller');
+const routes = require('./controllers');
 const helpers = require('./util/helpers');
 const sequelize = require('./config/connection');
 const session = require('express-session');
@@ -14,12 +14,13 @@ const PORT = process.env.PORT || 3001;
 
 // Set up sessions
 const sess = {
-    secret: 'Super secret secret',
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-        db: sequelize,
-    }),
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
 };
 app.use(session(sess));
 
@@ -41,5 +42,5 @@ app.use(routes);
 
 //sync database
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+  app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 });

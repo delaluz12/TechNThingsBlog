@@ -2,6 +2,8 @@
 const user = require('express').Router();
 
 const { User, Post, Comment } = require('../../models');
+//import the helper script for authentication
+const withAuth = require('../../util/auth');
 
 //  chk if user exists in db for login & start session
 user.post('/login', async (req, res) => {
@@ -24,7 +26,7 @@ user.post('/login', async (req, res) => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
 
-            res.json({ user: userData, message: 'You are now logged in!' });
+            res.json({ message: 'You are now logged in!' });
         });
 
     } catch (err) {
@@ -34,7 +36,7 @@ user.post('/login', async (req, res) => {
 });
 
 //create new user via sign-up route & start session
-user.post('/signup', async (req, res) => {
+user.post('/', async (req, res) => {
     try {
         const newUser = await User.create({
             username: req.body.username,
@@ -51,13 +53,16 @@ user.post('/signup', async (req, res) => {
 });
 
 // destory session upon logout
-user.post('/logout', async (req, res) => {
+user.post('/logout', (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
+            return;
         });
     } else {
         res.status(404).end();
+        return;
+
     }
 });
 
@@ -77,7 +82,7 @@ user.get('/', async (req, res) => {
 
 
 //get User by ID
-user.get('/:id', async (req, res) => {
+user.get('/:id', withAuth, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
             attributes: { exclude: ['password'], includes: [{ model: Post }, { model: Comment }] }
@@ -94,7 +99,7 @@ user.get('/:id', async (req, res) => {
 });
 
 //update user by ID
-user.put('/:id', async (req, res) => {
+user.put('/:id', withAuth, async (req, res) => {
     try {
         const updateUser = await User.update(req.body, {
             where: {
@@ -113,7 +118,7 @@ user.put('/:id', async (req, res) => {
 
 
 //delete User by ID 
-user.delete('/:id', async (req, res) => {
+user.delete('/:id', withAuth, async (req, res) => {
     try {
         const delUser = await User.destroy({
             where: {

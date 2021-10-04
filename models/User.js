@@ -25,7 +25,7 @@ User.init(
             allowNull: false,
             validate: {
                 //make sure there is at least 8 chars in password
-                min: 8,
+                min: 2,
             }
         }
     },
