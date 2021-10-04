@@ -30,17 +30,55 @@ dashboard.get('/', withAuth, async (req, res) => {
 
 
 //edit existing post
-dashboard.post('/edit/:id', withAuth, async (req, res) => {
+dashboard.get('/edit/:id', withAuth, async (req, res) => {
     try {
+        const dbData = await Post.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: ['id',
+                'title',
+                'content',
+                'created_at'
+            ],
+            include: [{
+                model: User,
+                attributes: ['username']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            }
+            ]
+        });
+
+
+        const post = dbData.get({ plain: true });
+        res.render('editPost', { post, loggedIn: req.session.logged_in });
 
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
+    }
+});
+
+
+//render form for new post upon clicking 'create post' btn
+dashboard.get('/new', withAuth, async (req, res) => {
+    try {
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err); s
     }
 })
 
 
 
 
-//edit existing post
+
 module.exports = dashboard;
