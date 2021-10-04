@@ -52,6 +52,7 @@ homepage.get('/signup', (req, res) => {
         res.status(500).json(err);
     }
 });
+// render single post with comments
 homepage.get('/posts/:id', async (req, res)=> {
     try {
         const dbPost = await Post.findByPk(req.params.id, {
@@ -68,6 +69,7 @@ homepage.get('/posts/:id', async (req, res)=> {
             return;
         }
         const post = dbPost.get({ plain: true});
+        console.log(post);
         res.render('singlePost', {post, loggedIn: req.session.logged_in});
     } catch (err) {
         console.log(err);
@@ -75,24 +77,32 @@ homepage.get('/posts/:id', async (req, res)=> {
     }
 })
 
-//render single post with comments when the title is clicked on the homepage --- must be logged in to view the comment option
-// homepage.get('/posts/:id', async (res, req) => {
-//     try {
-//         const dbPost = await Post.findByPk(req.params.id, {
-//             include: [
-//                 {
-//                     model: Comment,
-//                     attributes: ['id', 'comment_text', 'user_id', 'post_id', 'created_at'],
-//                     include: { model: User, attributes: ['username'] }
-//                 }, { model: User, attributes: ['username'] },
-//             ]
-//         });
-//         const post = dbPost.get({plain: true});
-//         res.render('singlePost', {post, loggedIn: req.session.logged_in});
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json(err);
-//     }
-// });
+// render comments for single post 
+homepage.get('/posts/:id', async (req, res)=> {
+    try {
+        const dbPost = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment, 
+                    attributes: ['id', 'comment_text', 'user_id', 'post_id', 'created_at'],
+                    include: { model: User, attributes: ['username'] }
+                }, { model: User, attributes: ['username'] },
+            ]
+        });
+        if(!dbPost){
+            res.status(400).json({message: 'No post found with that ID'});
+            return;
+        }
+        const post = dbPost.get({ plain: true});
+        console.log('=============================');
+        console.log(post);
+        res.render('commentData', {post, loggedIn: req.session.logged_in});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
+
 
 module.exports = homepage;

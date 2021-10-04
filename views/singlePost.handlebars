@@ -1,13 +1,27 @@
 <div class="col-6">
 
     {{> postData post}}
-</div>
-{{#if loggedIn}}
-<div class="col-4">
-    <div class="input-group">
-        <span class="input-group-text"></span>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+
+    {{#if loggedIn}}
+
+    <div class="input-group m-1 w-75">
+        {{!-- <span class="input-group-text">Leave a comment</span> --}}
+        <textarea class="form-control" aria-label="commentTextArea">Leave a comment</textarea>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
     </div>
-</div>
+
 {{/if}}
+</div>
+
+
+<div class="col-4">
+    <h4 class=" p-2 text-center"> Comment Section</h4>
+{{#each post.comments as |comment|}}
+{{> commentData}}
+{{/each}}
+
+</div>
+{{!-- {{#if}}
+
+
+{{/if}} --}}

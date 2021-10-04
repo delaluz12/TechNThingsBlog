@@ -1,0 +1,13 @@
+<div class="col">
+    <h4>Welcome {{posts.[0].user.username}}</h4>
+    {{!-- display posts if user has any --}}
+    {{#if posts.length}}
+    {{#each posts as |post|}}
+    {{> dashData post}}
+    {{/each}}
+
+    {{/if}}
+
+    {{!-- else display the add post button --}}
+    <button type="submit" class="btn btn-primary">Create Post</button>
+</div>
