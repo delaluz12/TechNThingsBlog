@@ -68,12 +68,12 @@ dashboard.get('/edit/:id', withAuth, async (req, res) => {
 
 
 //render form for new post upon clicking 'create post' btn
-dashboard.get('/new', withAuth, async (req, res) => {
+dashboard.get('/new', withAuth, (req, res) => {
     try {
-
+        res.render('newPost', {loggedIn: req.session.logged_in})
     } catch (err) {
         console.log(err);
-        res.status(500).json(err); s
+        res.status(500).json(err);
     }
 })
 

@@ -1,4 +1,4 @@
-<div class="col">
+<div class="row">
     <h4>Welcome {{posts.[0].user.username}}</h4>
     {{!-- display posts if user has any --}}
     {{#if posts.length}}
@@ -9,5 +9,5 @@
     {{/if}}
 
     {{!-- else display the add post button --}}
-    <a href="/new"><button type="button" class="btn btn-primary">Create Post</button></a>
+    <a href="/dashboard/new"><button type="button" class="btn btn-primary">Create Post</button></a>
 </div>

@@ -1,13 +1,18 @@
 <div class="col-12">
-    <div class="card w-100" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Edit Post</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Title</h6>
-            <textarea class="card-text w-100" id="updateTitle">{{post.title}}</textarea>
-            <h6 class="card-subtitle mb-2 text-muted">Content</h6>
-            <textarea class="card-text w-100 vh-100" id="updateContent">{{post.content}}</textarea>
-            <button type="submit" class="btn" id"updatePost">Update Post</button>
-            <button type="button" class="btn" id="deletePost">Delete</button>
+    <form class="updatePost-form">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Edit Post</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Title</h6>
+                <textarea class="card-text w-100" id="updateTitle">{{post.title}}</textarea>
+                <h6 class="card-subtitle mb-2 text-muted">Content</h6>
+                <textarea class="card-text w-100 vh-100" id="updateContent">{{post.content}}</textarea>
+                <button type="submit" class="btn" id"updatePost">Update Post</button>
+                <button type="button" class="btn" id="deletePost">Delete</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
+
+
+<script src="/js/updatePost.js"></script>
