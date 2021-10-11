@@ -19,7 +19,7 @@ homepage.get('/', async (req, res) => {
             post.get({ plain: true })
         );
         // console.log(posts);
-        console.log(req.session.logged_in);
+        // console.log(req.session.logged_in);
         res.render('homepage', { posts, loggedIn: req.session.logged_in })
     } catch (err) {
         console.log(err);
