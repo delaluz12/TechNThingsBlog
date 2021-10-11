@@ -14,13 +14,16 @@ dashboard.get('/', withAuth, async (req, res) => {
             },
             include: [
                 { model: User, attributes: ['username'] },
-            ]
+            ],
+            order: [
+                ['created_at', 'DESC'],
+            ],
 
         });
         const posts = dbPosts.map((post) =>
             post.get({ plain: true })
         );
-        console.log(posts);
+        // console.log(posts);
         res.render('dashboard', { posts, loggedIn: req.session.logged_in });
     } catch (err) {
         console.log(err);

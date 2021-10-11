@@ -4,7 +4,7 @@ const updatePostFormHandler = async (event) => {
     const title = document.querySelector('#updateTitle').value.trim();
     const content = document.querySelector('#updateContent').value.trim();
 
-    //grab post id to put into line ??
+    //grab post id to put into line 13
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];

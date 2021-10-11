@@ -15,7 +15,10 @@ comment.get('/', async (req, res) => {
                 //     include: { model: User, attributes: ['username'] }
                 // }, 
                 { model: User, attributes: ['username'] },
-            ]
+            ],
+            order: [
+                ['created_at', 'DESC'],
+            ],
         });
         res.status(200).json(comments);
     } catch (err) {
