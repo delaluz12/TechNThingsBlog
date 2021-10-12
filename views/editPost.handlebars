@@ -1,14 +1,14 @@
 <div class="col-12">
     <form class="updatePost-form">
-        <div class="card w-100" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Edit Post</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Title</h6>
-                <textarea class="card-text w-100" id="updateTitle">{{post.title}}</textarea>
-                <h6 class="card-subtitle mb-2 text-muted">Content</h6>
-                <textarea class="card-text w-100 vh-100" id="updateContent">{{post.content}}</textarea>
+        <div class="card">
+            <div class="card-content">
+                <h5 class="card-title" style="font-weight: bold;">Edit Post</h5>
+                <h6 class="card-title">Title</h6>
+                <textarea class="materialize-textarea" id="updateTitle" type="text">{{post.title}}</textarea>
+                <h6 class="card-title">Content</h6>
+                <textarea class="materialize-textarea" id="updateContent" type="text">{{post.content}}</textarea>
                 <button type="submit" class="btn" id"updatePost">Update Post</button>
-                <button type="button" class="btn deletePost-btn" >Delete</button>
+                <button type="button" class="btn deletePost-btn">Delete</button>
             </div>
         </div>
     </form>

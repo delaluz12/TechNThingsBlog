@@ -1,23 +1,27 @@
-<div class="col">
-    <form class="login-form">
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input type="username" class="form-control" id="username-login" aria-describedby="emailHelp">
+<div class="container">
+
+  <div class="row" style="margin-top: 1rem;">
+    <form class="col s12 login-form">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="username-login"  type="text" class="validate">
+          <label for="username-login">Username</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">lock_outline</i>
+          <input id="password-login" type="password" class="validate">
+          <label for="password-login">Password</label>
+        </div>
+      </div>
+      <button type="submit" class="btn waves-effect waves-light" id="loginBtn">Login</button>
+      <div style="margin-top: 1rem">
+        <a href="/signup" id="signupBtn" class="waves-effect waves-teal btn">Sign-Up</a>
+        
+      </div>
+    </form>
   </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password-login">
-  </div>
-  {{!-- <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> --}}
-  <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
-  <div>
-  <button type="text" class="btn btn-link" id="signupBtn"> <a href="/signup"> Sign-Up</a></button>
-  </div>
-</form>
 </div>
 
 {{!-- run login script --}}
-    <script src="./js/login.js"></script>
+<script src="./js/login.js"></script>

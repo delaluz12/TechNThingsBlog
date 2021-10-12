@@ -1,13 +1,12 @@
 {{!-- partial of the card template that will be used for each post --}}
-{{!-- <div class="col"> --}}
-  <div class="card " style="width: 18rem;">
-    <div class="card-body">
+
+  <div class="card medium hoverable">
+    <div class="card-content">
       <a href="/posts/{{id}}">
         <h5 class="card-title">{{title}}</h5>
       </a>
-      <h6 class="card-subtitle mb-2 text-muted">Posted by {{user.username}} on {{format_date createdAt}}</h6>
-      <p class="card-text">{{content}}</p>
+      <h6 class="card-subtitle mb-2 text-muted ">Posted by {{user.username}} on {{format_date createdAt}}</h6>
+      <p class="card-text ">{{content}}</p>
 
     </div>
   </div>
-{{!-- </div> --}}
