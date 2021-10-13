@@ -21,17 +21,10 @@
 
 ### ✨ [Demo](https://tech-n-things-blog.herokuapp.com/)
 
-## Install
-
-```sh
-npm install
-```
 
 ## Usage
 
-```sh
-npm run start
-```
+Demo of web page functionality
 
 ## Author
 
