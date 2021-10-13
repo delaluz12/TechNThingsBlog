@@ -22,9 +22,10 @@
 ### ✨ [Demo](https://tech-n-things-blog.herokuapp.com/)
 
 
-## Usage
+## Usage/Demo
 
 Demo of web page functionality
+![demo-gif](./assets/demo.gif)
 
 ## Author
 
